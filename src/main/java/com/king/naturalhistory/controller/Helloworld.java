@@ -1,4 +1,4 @@
-package com.king.naturalhistory.naturalhistory.controller;
+package com.king.naturalhistory.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
