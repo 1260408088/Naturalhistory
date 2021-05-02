@@ -1,16 +1,27 @@
 package com.king.naturalhistory.controller;
 
+import com.king.naturalhistory.bean.UserEntry;
+import com.king.naturalhistory.service.UserService;
 import com.king.naturalhistory.utils.UtilFunctions;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
+import java.util.Map;
+
 @Controller
 public class ImageCodeController {
+    @Autowired
+    UserService userService;
     @RequestMapping(value = "/verified/img", method = RequestMethod.GET)
     public void generateImgVerificationCode(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -37,5 +48,15 @@ public class ImageCodeController {
             UtilFunctions.reportError(e.toString(), e);*/
         }
     }
-
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public String login(@RequestBody Map<String,String> map) {
+        String username = map.get("username");
+        boolean empty = StringUtils.isEmpty(username);
+        if(empty){
+            throw new NullPointerException();
+        }
+        UserEntry user = userService.getUser(username);
+        return user.getRelname();
+    }
 }
