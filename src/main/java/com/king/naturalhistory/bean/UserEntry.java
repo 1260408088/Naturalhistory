@@ -1,15 +1,20 @@
 package com.king.naturalhistory.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "user")
+@JsonSerialize()
 public class UserEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userid;
     private String username;
+    @JsonIgnore
     private String password;
     private String telphone;
     private String realname;
@@ -21,36 +26,43 @@ public class UserEntry {
     public int getUserid() {
         return userid;
     }
+
     @Basic
     @Column(name = "username")
     public String getUsername() {
         return username;
     }
+
     @Basic
     @Column(name = "password")
     public String getPassword() {
         return password;
     }
+
     @Basic
     @Column(name = "telphone")
     public String getTelphone() {
         return telphone;
     }
+
     @Basic
     @Column(name = "realname")
     public String getRelname() {
         return realname;
     }
+
     @Basic
     @Column(name = "createtime")
     public Date getCreateTime() {
         return createtime;
     }
+
     @Basic
     @Column(name = "updatetime")
     public Date getUpdateTime() {
         return updatetime;
     }
+
     @Basic
     @Column(name = "lastlogintime")
     public Date getLastLoginTime() {

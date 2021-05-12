@@ -4,8 +4,18 @@ spring:
     username: root
     password: king199596stone
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
 server:
   port: 8000
+config:
+  jwt:
+    # 加密密钥
+    secret: iwqjhda8232bjgh432[cicada-smile]
+    # token有效时长
+    expire: 3600
+    # header 名称
+    cookieName: token
+    pubKeyPath: D:\workspace\idea\naturalhistory\src\main\resources\RAS\public.key # 公钥地址
+    priKeyPath: D:\workspace\idea\naturalhistory\src\main\resources\RAS\private.key # 私钥地址
